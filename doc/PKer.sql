@@ -56,7 +56,6 @@ CREATE TABLE question (
     options VARCHAR(300) COMMENT '题目的选项,个数不定',
     analysis TEXT COMMENT '题目分析',
     appendix TEXT COMMENT '附加,备用',
-    tag_id INT,
     creator INT COMMENT '创建者id',
     create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     last_modify DATETIME COMMENT '最后修改时间',
@@ -232,7 +231,11 @@ CREATE TABLE role (
 /*==============================================================*/
 CREATE TABLE tag (
     tag_id INT NOT NULL AUTO_INCREMENT,
-    content TEXT,
+    tag_name varchar(100) NOT NULL,
+    create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    creator int(11) NOT NULL,
+    is_private tinyint(1) NOT NULL DEFAULT '0',
+    memo varchar(500) DEFAULT NULL,
     PRIMARY KEY (tag_id)
 );
 
@@ -253,6 +256,19 @@ CREATE TABLE question_type (
     PRIMARY KEY (id)
 )  COMMENT='试题类型';
 
+DROP TABLE IF EXISTS question_tag;
+CREATE TABLE question_tag (
+  question_tag_id int(11) NOT NULL AUTO_INCREMENT,
+  question_id int(11) NOT NULL,
+  tag_id int(11) NOT NULL,
+  create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  creator varchar(100) DEFAULT NULL,
+  PRIMARY KEY (question_tag_id),
+  KEY fk_question_tag_tid (tag_id),
+  KEY fk_question_tag_qid (question_id),
+  CONSTRAINT fk_question_tag_qid FOREIGN KEY (question_id) REFERENCES question (question_id) ON DELETE CASCADE,
+  CONSTRAINT fk_question_tag_tid FOREIGN KEY (tag_id) REFERENCES tag (tag_id) ON DELETE CASCADE
+);
 
 alter table question add constraint fk_answer_option foreign key (answer_id)
       references choice (option_id) on delete restrict on update restrict;
@@ -260,8 +276,8 @@ alter table question add constraint fk_answer_option foreign key (answer_id)
 /*alter table question add constraint fk_paper_question foreign key (paper_id)
       references paper (paper_id) on delete restrict on update restrict;*/
 
-alter table question add constraint fk_tag_question foreign key (tag_id)
-      references tag (tag_id) on delete restrict on update restrict;
+/*alter table question add constraint fk_tag_question foreign key (tag_id)
+      references tag (tag_id) on delete restrict on update restrict;*/
 
 alter table question add constraint fk_user_creator foreign key (creator)
       references user (user_id) on delete restrict on update restrict;
