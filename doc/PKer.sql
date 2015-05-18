@@ -1,14 +1,18 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/5/9 ������ 22:21:37                        */
+/* Created on:     2015/5/9 ÐÇÆÚÁù 22:21:37                        */
 /*==============================================================*/
+drop database pker;
 
+CREATE SCHEMA pker ;
 
-drop table if exists Question;
+use pker;
 
-drop table if exists User;
+drop table if exists question;
 
-drop table if exists User_role;
+drop table if exists user;
+
+drop table if exists user_role;
 
 drop table if exists comment;
 
@@ -34,309 +38,306 @@ drop table if exists role;
 
 drop table if exists tag;
 
+drop table if exists category;
+
+drop table if exists question_type;
+
 /*==============================================================*/
-/* Table: Question                                              */
+/* table: question                                              */
 /*==============================================================*/
-create table Question
-(
-   questionid           int not null auto_increment,
-   paperid              int,
-   answerid             int,
-   content              varchar(500) not null,
-   category             national varchar(30),
-   type                 varchar(30),
-   options              varchar(20),
-   explanation          national varchar(100),
-   appendix             text,
-   tag_id               int,
-   creator              int,
-   last_modify          datetime,
-   right_times          int,
-   expose_times         int,
-   wrong_times          int,
-   difficulty           varchar(20),
-   primary key (questionid)
+CREATE TABLE question (
+    question_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(40) NOT NULL COMMENT '问题名称/代号',
+    answer_id INT COMMENT '每个选项有一个id,answerid是正确选项的id',
+    content VARCHAR(500) NOT NULL COMMENT '题干',
+    reference VARCHAR(1000) DEFAULT NULL COMMENT '考虑带图片的题目',
+    category_id INT COMMENT '题目所属学科id,比如考研英语,gre,toefl等等',
+    type_id INT COMMENT '题目类型id,包括选择题,填空题,简答题等等',
+    options VARCHAR(300) COMMENT '题目的选项,个数不定',
+    analysis TEXT COMMENT '题目分析',
+    appendix TEXT COMMENT '附加,备用',
+    tag_id INT,
+    creator INT COMMENT '创建者id',
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    last_modify DATETIME COMMENT '最后修改时间',
+    right_times INT COMMENT '正确次数',
+    expose_times INT COMMENT '被做次数',
+    wrong_times INT COMMENT '错误次数',
+    difficulty INT(5) COMMENT '题目难度',
+    PRIMARY KEY (question_id)
 );
 
 /*==============================================================*/
-/* Table: User                                                  */
-/*==============================================================*/
-create table User
-(
-   Userid               int not null auto_increment,
-   Username             varchar(50) not null,
-   Truename             varchar(50),
-   Password             varchar(30) not null,
-   Email                varchar(50),
-   Phone                varchar(20),
-   Gender               varchar(2),
-   Birthday             datetime,
-   State                varchar(10),
-   Registertime         datetime not null,
-   integral             int,
-   level                int,
-   account_enabled      bool,
-   addby                int,
-   last_login_time      datetime,
-   login_time           datetime,
-   primary key (Userid)
+CREATE TABLE user (
+    user_id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    truename VARCHAR(50),
+    password VARCHAR(30) NOT NULL,
+    email VARCHAR(50),
+    phone VARCHAR(20),
+    gender VARCHAR(2),
+    birthday DATETIME,
+    enabled TINYINT(1) DEFAULT '0' COMMENT '激活状态：0-未激活 1-激活',
+    state TINYINT(1) DEFAULT '0' COMMENT '在线状态：0-未在线 1-在线',
+    add_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '注册时间',
+    registertime DATETIME NOT NULL,
+    integral INT COMMENT '积分',
+    level INT COMMENT '等级',
+    addby INT COMMENT '某个用户添加的或者受某个用户邀请后注册的',
+    last_login_time TIMESTAMP NULL DEFAULT NULL,
+    login_time TIMESTAMP NULL DEFAULT NULL,
+    PRIMARY KEY (user_id)
 );
 
 /*==============================================================*/
-/* Table: User_role                                             */
-/*==============================================================*/
-create table User_role
-(
-   urid                 int not null auto_increment,
-   Userid               int,
-   roleid               int,
-   primary key (urid)
+CREATE TABLE user_role (
+    urid INT NOT NULL AUTO_INCREMENT,
+    user_id INT,
+    role_id INT,
+    PRIMARY KEY (urid)
 );
 
 /*==============================================================*/
-/* Table: comment                                               */
+/* table: comment                                               */
 /*==============================================================*/
-create table comment
-(
-   commentid            int not null auto_increment,
-   questionid           int,
-   quotecommentid       int,
-   Userid               int,
-   createtime           datetime,
-   commentcontent       varchar(100),
-   primary key (commentid)
+CREATE TABLE comment (
+    comment_id INT NOT NULL AUTO_INCREMENT,
+    question_id INT NOT NULL,
+    quote_comment_id INT DEFAULT NULL COMMENT '回复的评论的id,null表示对问题的直接评论',
+    user_id INT,
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    content_msg TEXT NOT NULL COMMENT '评论不能为空',
+    PRIMARY KEY (comment_id)
 );
 
 /*==============================================================*/
-/* Table: competition                                           */
-/*==============================================================*/
-create table competition
-(
-   competitionid        int not null auto_increment,
-   Userid               int,
-   paperid              int,
-   PKtype               int,
-   createtime           datetime,
-   updatetime           datetime,
-   primary key (competitionid)
+CREATE TABLE competition (
+    competition_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    paper_id INT NOT NULL,
+    pktype INT COMMENT 'pk类型：0-多人pk,1-双人pk,3-好友pk...',
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (competition_id)
 );
 
 /*==============================================================*/
-/* Table: competition_user                                      */
+/* table: competition_user                                      */
 /*==============================================================*/
-create table competition_user
-(
-   cuid                 int not null auto_increment,
-   competitionid        int,
-   Userid               int,
-   createtime           datetime,
-   starttime            datetime,
-   endtime              datetime,
-   primary key (cuid)
+CREATE TABLE competition_user (
+    cuid INT NOT NULL AUTO_INCREMENT,
+    competition_id INT NOT NULL,
+    user_id INT NOT NULL COMMENT '参加比赛的用户id',
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '开始答题时间',
+    submit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+    answer_sheet MEDIUMTEXT COMMENT '用户的答案',
+    duration INT(10) NOT NULL COMMENT '用户总用时',
+    right_questions INT COMMENT '正确题数',
+    wrong_questions INT COMMENT '错误题数',
+    noanswer_questions INT COMMENT '未作答题数',
+    point_get DOUBLE COMMENT '用户得分',
+    PRIMARY KEY (cuid)
 );
 
 /*==============================================================*/
-/* Table: favorite                                              */
-/*==============================================================*/
-create table favorite
-(
-   favoriteid           int not null auto_increment,
-   Userid               int,
-   questionid           int,
-   createtime           datetime,
-   primary key (favoriteid)
+CREATE TABLE favorite (
+    favorite_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    question_id INT NOT NULL,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (favorite_id)
 );
 
 /*==============================================================*/
-/* Table: follow                                                */
-/*==============================================================*/
-create table follow
-(
-   followid             int not null auto_increment,
-   followerid           int,
-   followedid           int,
-   createtime           datetime,
-   primary key (followid)
+CREATE TABLE follow (
+    follow_id INT NOT NULL AUTO_INCREMENT,
+    follower_id INT NOT NULL COMMENT '关注者id',
+    followed_id INT NOT NULL COMMENT '被关注者id',
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (follow_id)
 );
 
 /*==============================================================*/
-/* Table: message                                               */
-/*==============================================================*/
-create table message
-(
-   msgid                int not null auto_increment,
-   senderid             int,
-   receiverid           int,
-   createtime           datetime,
-   isread               bool,
-   receivetime          datetime,
-   msgcontent           varchar(300),
-   primary key (msgid)
+CREATE TABLE message (
+    msgid INT NOT NULL AUTO_INCREMENT,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    is_read BOOL COMMENT '是否已读',
+    receive_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    msgcontent TEXT NOT NULL,
+    PRIMARY KEY (msgid)
 );
 
 /*==============================================================*/
-/* Table: note                                                  */
-/*==============================================================*/
-create table note
-(
-   noteid               int not null auto_increment,
-   questionid           int,
-   Userid               int,
-   notecontent          varchar(100),
-   createtime           datetime,
-   updatetime           datetime,
-   primary key (noteid)
+CREATE TABLE note (
+    note_id INT NOT NULL AUTO_INCREMENT,
+    question_id INT NOT NULL,
+    user_id INT NOT NULL,
+    note_content TEXT NOT NULL,
+    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (note_id)
 );
 
 /*==============================================================*/
-/* Table: "option"                                              */
-/*==============================================================*/
-create table choice
-(
-   optionid             int not null auto_increment,
-   questionid           int,
-   optionorder          varchar(10),
-   optioncontent        varchar(100),
-   primary key (optionid)
+CREATE TABLE choice (
+    option_id INT NOT NULL AUTO_INCREMENT,
+    question_id INT NOT NULL,
+    option_order INT,
+    option_content TEXT NOT NULL,
+    PRIMARY KEY (option_id)
 );
 
 /*==============================================================*/
-/* Table: paper                                                 */
-/*==============================================================*/
-create table paper
-(
-   paperid              int not null auto_increment,
-   name                 varchar(20),
-   time                 time,
-   quantities           int,
-   category             varchar(30),
-   type                 varchar(30),
-   isVisible            bool,
-   status               varchar(30),
-   summary              text,
-   creator              int,
-   primary key (paperid)
+CREATE TABLE paper (
+    paper_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(20) COMMENT '试卷名称',
+    duration INT(11) NOT NULL COMMENT '试卷考试时间',
+    quantity INT COMMENT '题目数量',
+    category_id INT COMMENT '题目所属学科,比如考研英语,gre,toefl等等',
+    type VARCHAR(50) COMMENT '题目类型,包括选择题,填空题,简答题等等',
+    is_visible TINYINT(1) DEFAULT '0' COMMENT '是否所有用户可见,默认为0',
+    is_subjective TINYINT(1) DEFAULT '0' COMMENT '为1表示为包含主观题的试卷,需阅卷',
+    status TINYINT(1) NOT NULL DEFAULT '0' COMMENT '试卷状态， 0未完成 -> 1已完成 -> 2已发布 -> 3通过审核 （已发布和通过审核的无法再修改）',
+    summary TEXT COMMENT '试卷概述',
+    creator INT DEFAULT NULL COMMENT '创建人的账号',
+    PRIMARY KEY (paper_id)
 );
 
 /*==============================================================*/
-/* Table: record                                                */
-/*==============================================================*/
-create table record
-(
-   recordid             int not null auto_increment,
-   Userid               int,
-   questionid           int,
-   paperid              int,
-   useranswerid         int,
-   mark                 bool,
-   duration             time,
-   remark               varchar(100),
-   point_get            double,
-   primary key (recordid)
+CREATE TABLE record (
+    record_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    question_id INT NOT NULL,
+    paper_id INT,
+    user_answer_id INT,
+    mark BOOL DEFAULT '0' COMMENT '是否标记',
+    duration TIME COMMENT '单道题目耗时',
+    remark VARCHAR(100) COMMENT '用户备注',
+    PRIMARY KEY (record_id)
 );
 
 /*==============================================================*/
-/* Table: role                                                  */
-/*==============================================================*/
-create table role
-(
-   roleid               int not null auto_increment,
-   description          varchar(20),
-   name                 varchar(20) not null,
-   createtime           datetime not null,
-   updatetime           datetime,
-   primary key (roleid)
+CREATE TABLE role (
+    role_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL,
+    description VARCHAR(20),
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (role_id)
 );
 
 /*==============================================================*/
-/* Table: tag                                                  */
-/*==============================================================*/
-create table tag
-(
-   tag_id                int not null auto_increment,
-   content              text,
-   primary key (tag_id)
+CREATE TABLE tag (
+    tag_id INT NOT NULL AUTO_INCREMENT,
+    content TEXT,
+    PRIMARY KEY (tag_id)
 );
 
 
-alter table Question add constraint FK_answer_option foreign key (answerid)
-      references choice (optionid) on delete restrict on update restrict;
+/*==============================================================*/
+CREATE TABLE category (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL,
+    description TEXT,
+    PRIMARY KEY (id)
+)  COMMENT='学科';
 
-alter table Question add constraint FK_paper_question foreign key (paperid)
-      references paper (paperid) on delete restrict on update restrict;
+/*==============================================================*/
+CREATE TABLE question_type (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL,
+    subjective TINYINT(1) NOT NULL DEFAULT '0',
+    PRIMARY KEY (id)
+)  COMMENT='试题类型';
 
-alter table Question add constraint FK_tag_question foreign key (tag_id)
+
+alter table question add constraint fk_answer_option foreign key (answer_id)
+      references choice (option_id) on delete restrict on update restrict;
+
+/*alter table question add constraint fk_paper_question foreign key (paper_id)
+      references paper (paper_id) on delete restrict on update restrict;*/
+
+alter table question add constraint fk_tag_question foreign key (tag_id)
       references tag (tag_id) on delete restrict on update restrict;
 
-alter table Question add constraint FK_user_creator foreign key (creator)
-      references User (Userid) on delete restrict on update restrict;
+alter table question add constraint fk_user_creator foreign key (creator)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table User_role add constraint FK_role_user foreign key (roleid)
-      references role (roleid) on delete restrict on update restrict;
+alter table question add constraint fk_type_question foreign key (type_id)
+      references question_type (id) on delete restrict on update restrict;
 
-alter table User_role add constraint FK_user_role foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table question add constraint fk_category_question foreign key (category_id)
+      references category (id) on delete restrict on update restrict;
 
-alter table comment add constraint FK_question_comment foreign key (questionid)
-      references Question (questionid) on delete restrict on update restrict;
+alter table user_role add constraint fk_role_user foreign key (role_id)
+      references role (role_id) on delete restrict on update restrict;
 
-alter table comment add constraint FK_quote foreign key (quotecommentid)
-      references comment (commentid) on delete restrict on update restrict;
+alter table user_role add constraint fk_user_role foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table comment add constraint FK_user_comment foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table comment add constraint fk_question_comment foreign key (question_id)
+      references question (question_id) on delete restrict on update restrict;
 
-alter table competition add constraint FK_paper_com foreign key (paperid)
-      references paper (paperid) on delete restrict on update restrict;
+alter table comment add constraint fk_quote foreign key (quote_comment_id)
+      references comment (comment_id) on delete restrict on update restrict;
 
-alter table competition add constraint FK_user_com foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table comment add constraint fk_user_comment foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table competition_user add constraint FK_competition_participant foreign key (competitionid)
-      references competition (competitionid) on delete restrict on update restrict;
+alter table competition add constraint fk_paper_com foreign key (paper_id)
+      references paper (paper_id) on delete restrict on update restrict;
 
-alter table competition_user add constraint FK_user_participant foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table competition add constraint fk_user_com foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table favorite add constraint FK_question_favorite foreign key (questionid)
-      references Question (questionid) on delete restrict on update restrict;
+alter table competition_user add constraint fk_competition_participant foreign key (competition_id)
+      references competition (competition_id) on delete restrict on update restrict;
 
-alter table favorite add constraint FK_user_favorite foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table competition_user add constraint fk_user_participant foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table follow add constraint FK_followed foreign key (followerid)
-      references User (Userid) on delete restrict on update restrict;
+alter table favorite add constraint fk_question_favorite foreign key (question_id)
+      references question (question_id) on delete restrict on update restrict;
 
-alter table follow add constraint FK_follower foreign key (followedid)
-      references User (Userid) on delete restrict on update restrict;
+alter table favorite add constraint fk_user_favorite foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table message add constraint FK_receiver foreign key (senderid)
-      references User (Userid) on delete restrict on update restrict;
+alter table follow add constraint fk_followed foreign key (follower_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table message add constraint FK_sender foreign key (receiverid)
-      references User (Userid) on delete restrict on update restrict;
+alter table follow add constraint fk_follower foreign key (followed_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table note add constraint FK_note_question foreign key (questionid)
-      references Question (questionid) on delete restrict on update restrict;
+alter table message add constraint fk_receiver foreign key (sender_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table note add constraint FK_user_note foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table message add constraint fk_sender foreign key (receiver_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table choice add constraint FK_question_option foreign key (questionid)
-      references Question (questionid) on delete restrict on update restrict;
+alter table note add constraint fk_note_question foreign key (question_id)
+      references question (question_id) on delete restrict on update restrict;
 
-alter table paper add constraint FK_user_paper foreign key (creator)
-      references User (Userid) on delete restrict on update restrict;
+alter table note add constraint fk_user_note foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table record add constraint FK_answer_record foreign key (useranswerid)
-      references choice (optionid) on delete restrict on update restrict;
+alter table choice add constraint fk_question_option foreign key (question_id)
+      references question (question_id) on delete restrict on update restrict;
 
-alter table record add constraint FK_paper_record foreign key (paperid)
-      references paper (paperid) on delete restrict on update restrict;
+alter table paper add constraint fk_user_paper foreign key (creator)
+      references user (user_id) on delete restrict on update restrict;
 
-alter table record add constraint FK_question_record foreign key (questionid)
-      references Question (questionid) on delete restrict on update restrict;
+alter table record add constraint fk_answer_record foreign key (user_answer_id)
+      references choice (option_id) on delete restrict on update restrict;
 
-alter table record add constraint FK_user_record foreign key (Userid)
-      references User (Userid) on delete restrict on update restrict;
+alter table record add constraint fk_paper_record foreign key (paper_id)
+      references paper (paper_id) on delete restrict on update restrict;
+
+alter table record add constraint fk_question_record foreign key (question_id)
+      references question (question_id) on delete restrict on update restrict;
+
+alter table record add constraint fk_user_record foreign key (user_id)
+      references user (user_id) on delete restrict on update restrict;
 
