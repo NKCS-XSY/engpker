@@ -4,7 +4,7 @@
 /*==============================================================*/
 drop database pker;
 
-CREATE SCHEMA pker ;
+create schema pker ;
 
 use pker;
 
