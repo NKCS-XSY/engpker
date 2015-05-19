@@ -26,9 +26,9 @@ buildNumber.properties
 
 #Eclipse
 
-*.pydevproject
-.metadata
-.gradle
+#*.pydevproject
+#.metadata
+#.gradle
 bin/
 tmp/
 *.tmp
@@ -43,26 +43,26 @@ local.properties
 #.project
 
 # External tool builders
-.externalToolBuilders/
+#.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
+#*.launch
 
 # CDT-specific
-.cproject
+#.cproject
 
 # JDT-specific (Eclipse Java Development Tools)
 #.classpath
 
 # Java annotation processor (APT)
-.factorypath
+#.factorypath
 
 # PDT-specific
 #.buildpath
 
 # sbteclipse plugin
-.target
+#.target
 
 # TeXlipse plugin
-.texlipse
+#.texlipse
 
