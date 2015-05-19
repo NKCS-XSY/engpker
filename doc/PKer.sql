@@ -2,7 +2,7 @@
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2015/5/9 ÐÇÆÚÁù 22:21:37                        */
 /*==============================================================*/
-drop database pker;
+drop database if exists pker;
 
 create schema pker ;
 
@@ -115,8 +115,8 @@ CREATE TABLE competition (
     user_id INT NOT NULL,
     paper_id INT NOT NULL,
     pktype INT COMMENT 'pk类型：0-多人pk,1-双人pk,3-好友pk...',
-    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    create_time TIMESTAMP NOT NULL,
+    update_time TIMESTAMP,
     PRIMARY KEY (competition_id)
 );
 
@@ -127,9 +127,9 @@ CREATE TABLE competition_user (
     cuid INT NOT NULL AUTO_INCREMENT,
     competition_id INT NOT NULL,
     user_id INT NOT NULL COMMENT '参加比赛的用户id',
-    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '开始答题时间',
-    submit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+    create_time TIMESTAMP NOT NULL,
+    start_time TIMESTAMP NOT NULL COMMENT '开始答题时间',
+    submit_time TIMESTAMP NOT NULL COMMENT '提交时间',
     answer_sheet MEDIUMTEXT COMMENT '用户的答案',
     duration INT(10) NOT NULL COMMENT '用户总用时',
     right_questions INT COMMENT '正确题数',
@@ -162,9 +162,9 @@ CREATE TABLE message (
     msgid INT NOT NULL AUTO_INCREMENT,
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
-    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    create_time TIMESTAMP NULL,
     is_read BOOL COMMENT '是否已读',
-    receive_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    receive_time TIMESTAMP NOT NULL,
     msgcontent TEXT NOT NULL,
     PRIMARY KEY (msgid)
 );
@@ -175,8 +175,8 @@ CREATE TABLE note (
     question_id INT NOT NULL,
     user_id INT NOT NULL,
     note_content TEXT NOT NULL,
-    create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP,
     PRIMARY KEY (note_id)
 );
 
@@ -224,7 +224,7 @@ CREATE TABLE role (
     name VARCHAR(20) NOT NULL,
     description VARCHAR(20),
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP,
     PRIMARY KEY (role_id)
 );
 
