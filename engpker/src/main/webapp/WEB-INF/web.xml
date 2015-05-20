@@ -6,6 +6,6 @@
     version="3.0">
   <display-name>English PKer</display-name>
   <welcome-file-list>
-    <welcome-file>/jsp/index.jsp</welcome-file>
+    <welcome-file>/jsp/index.html</welcome-file>
   </welcome-file-list>
 </web-app>
