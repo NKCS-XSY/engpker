@@ -3,12 +3,16 @@ package edu.nk.pker.model.dao;
 // Generated 2015-5-20 10:21:32 by Hibernate Tools 4.3.1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+
+import edu.nk.pker.model.po.QuestionType;
 
 /**
  * Home object for domain model class QuestionType.
