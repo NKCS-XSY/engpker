@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Competition" table="competition" catalog="pker" optimistic-lock="version">
+        <id name="competitionId" type="java.lang.Integer">
+            <column name="competition_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="paper" class="edu.nk.pker.model.po.Paper" fetch="select">
+            <column name="paper_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="pktype" type="java.lang.Integer">
+            <column name="pktype">
+                <comment>pk&#192;&#224;&#208;&#205;&#163;&#186;0-&#182;&#224;&#200;&#203;pk,1-&#203;&#171;&#200;&#203;pk,3-&#186;&#195;&#211;&#209;pk...</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" not-null="true" />
+        </property>
+        <set name="competitionUsers" table="competition_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="competition_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.CompetitionUser" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Record" table="record" catalog="pker" optimistic-lock="version">
+        <id name="recordId" type="java.lang.Integer">
+            <column name="record_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="choice" class="edu.nk.pker.model.po.Choice" fetch="select">
+            <column name="user_answer_id" />
+        </many-to-one>
+        <many-to-one name="paper" class="edu.nk.pker.model.po.Paper" fetch="select">
+            <column name="paper_id" />
+        </many-to-one>
+        <many-to-one name="question" class="edu.nk.pker.model.po.Question" fetch="select">
+            <column name="question_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="mark" type="java.lang.Boolean">
+            <column name="mark">
+                <comment>&#202;&#199;&#183;&#241;&#177;&#234;&#188;&#199;</comment>
+            </column>
+        </property>
+        <property name="duration" type="int">
+            <column name="duration" not-null="true">
+                <comment>&#181;&#165;&#181;&#192;&#204;&#226;&#196;&#191;&#186;&#196;&#202;&#177;</comment>
+            </column>
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" length="100">
+                <comment>&#211;&#195;&#187;&#167;&#177;&#184;&#215;&#162;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Choice" table="choice" catalog="pker" optimistic-lock="version">
+        <id name="optionId" type="java.lang.Integer">
+            <column name="option_id" />
+            <generator class="identity" />
+        </id>
+        <property name="questionId" type="int">
+            <column name="question_id" not-null="true" />
+        </property>
+        <property name="optionOrder" type="java.lang.Integer">
+            <column name="option_order" />
+        </property>
+        <property name="optionContent" type="string">
+            <column name="option_content" length="65535" not-null="true" />
+        </property>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="answer_id">
+                    <comment>
+                    &#195;&#191;&#184;&#246;&#209;&#161;&#207;&#238;&#211;&#208;&#210;&#187;&#184;&#246;id,answerid&#202;&#199;&#213;&#253;&#200;&#183;&#209;&#161;&#207;&#238;&#181;&#196;id</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Question" />
+        </set>
+        <set name="records" table="record" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_answer_id" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Record" />
+        </set>
+    </class>
+</hibernate-mapping>

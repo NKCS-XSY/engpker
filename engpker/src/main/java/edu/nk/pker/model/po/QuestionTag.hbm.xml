@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.QuestionTag" table="question_tag" catalog="pker" optimistic-lock="version">
+        <id name="questionTagId" type="java.lang.Integer">
+            <column name="question_tag_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="question" class="edu.nk.pker.model.po.Question" fetch="select">
+            <column name="question_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tag" class="edu.nk.pker.model.po.Tag" fetch="select">
+            <column name="tag_id" not-null="true" />
+        </many-to-one>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="creator" type="string">
+            <column name="creator" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

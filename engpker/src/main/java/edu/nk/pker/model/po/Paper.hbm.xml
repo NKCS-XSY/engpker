@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Paper" table="paper" catalog="pker" optimistic-lock="version">
+        <id name="paperId" type="java.lang.Integer">
+            <column name="paper_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="creator">
+                <comment>&#180;&#180;&#189;&#168;&#200;&#203;&#181;&#196;&#213;&#203;&#186;&#197;</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="20">
+                <comment>&#202;&#212;&#190;&#237;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="duration" type="int">
+            <column name="duration" not-null="true">
+                <comment>&#202;&#212;&#190;&#237;&#191;&#188;&#202;&#212;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="quantity">
+                <comment>&#204;&#226;&#196;&#191;&#202;&#253;&#193;&#191;</comment>
+            </column>
+        </property>
+        <property name="categoryId" type="java.lang.Integer">
+            <column name="category_id">
+                <comment>
+                &#204;&#226;&#196;&#191;&#203;&#249;&#202;&#244;&#209;&#167;&#191;&#198;,&#177;&#200;&#200;&#231;&#191;&#188;&#209;&#208;&#211;&#162;&#211;&#239;,gre,toefl&#181;&#200;&#181;&#200;</comment>
+            </column>
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="50">
+                <comment>
+                &#204;&#226;&#196;&#191;&#192;&#224;&#208;&#205;,&#176;&#252;&#192;&#168;&#209;&#161;&#212;&#241;&#204;&#226;,&#204;&#238;&#191;&#213;&#204;&#226;,&#188;&#242;&#180;&#240;&#204;&#226;&#181;&#200;&#181;&#200;</comment>
+            </column>
+        </property>
+        <property name="isVisible" type="java.lang.Boolean">
+            <column name="is_visible">
+                <comment>&#202;&#199;&#183;&#241;&#203;&#249;&#211;&#208;&#211;&#195;&#187;&#167;&#191;&#201;&#188;&#251;,&#196;&#172;&#200;&#207;&#206;&#170;0</comment>
+            </column>
+        </property>
+        <property name="isSubjective" type="java.lang.Boolean">
+            <column name="is_subjective">
+                <comment>
+                &#206;&#170;1&#177;&#237;&#202;&#190;&#206;&#170;&#176;&#252;&#186;&#172;&#214;&#247;&#185;&#219;&#204;&#226;&#181;&#196;&#202;&#212;&#190;&#237;,&#208;&#232;&#212;&#196;&#190;&#237;</comment>
+            </column>
+        </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true">
+                <comment>&#202;&#212;&#190;&#237;&#215;&#180;&#204;&#172;&#163;&#172; 0&#206;&#180;&#205;&#234;&#179;&#201; -&gt; 1&#210;&#209;&#205;&#234;&#179;&#201; -&gt;
+                2&#210;&#209;&#183;&#162;&#178;&#188; -&gt; 3&#205;&#168;&#185;&#253;&#201;&#243;&#186;&#203;
+                &#163;&#168;&#210;&#209;&#183;&#162;&#178;&#188;&#186;&#205;&#205;&#168;&#185;&#253;&#201;&#243;&#186;&#203;&#181;&#196;&#206;&#222;&#183;&#168;&#212;&#217;&#208;&#222;&#184;&#196;&#163;&#169;</comment>
+            </column>
+        </property>
+        <property name="summary" type="string">
+            <column name="summary" length="65535">
+                <comment>&#202;&#212;&#190;&#237;&#184;&#197;&#202;&#246;</comment>
+            </column>
+        </property>
+        <set name="records" table="record" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="paper_id" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Record" />
+        </set>
+        <set name="competitions" table="competition" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="paper_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Competition" />
+        </set>
+    </class>
+</hibernate-mapping>

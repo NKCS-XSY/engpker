@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.User" table="user" catalog="pker" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" />
+        </property>
+        <property name="truename" type="string">
+            <column name="truename" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="30" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="20" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="2" />
+        </property>
+        <property name="birthday" type="timestamp">
+            <column name="birthday" length="19" />
+        </property>
+        <property name="enabled" type="java.lang.Boolean">
+            <column name="enabled">
+                <comment>&#188;&#164;&#187;&#238;&#215;&#180;&#204;&#172;&#163;&#186;0-&#206;&#180;&#188;&#164;&#187;&#238; 1-&#188;&#164;&#187;&#238;</comment>
+            </column>
+        </property>
+        <property name="state" type="java.lang.Boolean">
+            <column name="state">
+                <comment>&#212;&#218;&#207;&#223;&#215;&#180;&#204;&#172;&#163;&#186;0-&#206;&#180;&#212;&#218;&#207;&#223; 1-&#212;&#218;&#207;&#223;</comment>
+            </column>
+        </property>
+        <property name="addDate" type="timestamp">
+            <column name="add_date" length="19">
+                <comment>&#215;&#162;&#178;&#225;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="registertime" type="timestamp">
+            <column name="registertime" length="19" />
+        </property>
+        <property name="integral" type="java.lang.Integer">
+            <column name="integral">
+                <comment>&#187;&#253;&#183;&#214;</comment>
+            </column>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level">
+                <comment>&#181;&#200;&#188;&#182;</comment>
+            </column>
+        </property>
+        <property name="addby" type="java.lang.Integer">
+            <column name="addby">
+                <comment>
+                &#196;&#179;&#184;&#246;&#211;&#195;&#187;&#167;&#204;&#237;&#188;&#211;&#181;&#196;&#187;&#242;&#213;&#223;&#202;&#220;&#196;&#179;&#184;&#246;&#211;&#195;&#187;&#167;&#209;&#251;&#199;&#235;&#186;&#243;&#215;&#162;&#178;&#225;&#181;&#196;</comment>
+            </column>
+        </property>
+        <property name="lastLoginTime" type="timestamp">
+            <column name="last_login_time" length="19" />
+        </property>
+        <property name="loginTime" type="timestamp">
+            <column name="login_time" length="19" />
+        </property>
+        <set name="papers" table="paper" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="creator">
+                    <comment>&#180;&#180;&#189;&#168;&#200;&#203;&#181;&#196;&#213;&#203;&#186;&#197;</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Paper" />
+        </set>
+        <set name="records" table="record" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Record" />
+        </set>
+        <set name="followsForFollowedId" table="follow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="followed_id" not-null="true">
+                    <comment>&#177;&#187;&#185;&#216;&#215;&#162;&#213;&#223;id</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Follow" />
+        </set>
+        <set name="messagesForSenderId" table="message" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sender_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Message" />
+        </set>
+        <set name="userRoles" table="user_role" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.UserRole" />
+        </set>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="creator">
+                    <comment>&#180;&#180;&#189;&#168;&#213;&#223;id</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Question" />
+        </set>
+        <set name="favorites" table="favorite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Favorite" />
+        </set>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Comment" />
+        </set>
+        <set name="notes" table="note" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Note" />
+        </set>
+        <set name="followsForFollowerId" table="follow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="follower_id" not-null="true">
+                    <comment>&#185;&#216;&#215;&#162;&#213;&#223;id</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Follow" />
+        </set>
+        <set name="competitionUsers" table="competition_user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true">
+                    <comment>&#178;&#206;&#188;&#211;&#177;&#200;&#200;&#252;&#181;&#196;&#211;&#195;&#187;&#167;id</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.CompetitionUser" />
+        </set>
+        <set name="messagesForReceiverId" table="message" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="receiver_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Message" />
+        </set>
+        <set name="competitions" table="competition" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Competition" />
+        </set>
+    </class>
+</hibernate-mapping>

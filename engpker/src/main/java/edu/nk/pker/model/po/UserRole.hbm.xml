@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.UserRole" table="user_role" catalog="pker" optimistic-lock="version">
+        <id name="urid" type="java.lang.Integer">
+            <column name="urid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="role" class="edu.nk.pker.model.po.Role" fetch="select">
+            <column name="role_id" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

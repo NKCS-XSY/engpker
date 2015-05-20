@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Comment" table="comment" catalog="pker" optimistic-lock="version">
+        <id name="commentId" type="java.lang.Integer">
+            <column name="comment_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="comment" class="edu.nk.pker.model.po.Comment" fetch="select">
+            <column name="quote_comment_id">
+                <comment>
+                &#187;&#216;&#184;&#180;&#181;&#196;&#198;&#192;&#194;&#219;&#181;&#196;id,null&#177;&#237;&#202;&#190;&#182;&#212;&#206;&#202;&#204;&#226;&#181;&#196;&#214;&#177;&#189;&#211;&#198;&#192;&#194;&#219;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="question" class="edu.nk.pker.model.po.Question" fetch="select">
+            <column name="question_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" />
+        </many-to-one>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="contentMsg" type="string">
+            <column name="content_msg" length="65535" not-null="true">
+                <comment>&#198;&#192;&#194;&#219;&#178;&#187;&#196;&#220;&#206;&#170;&#191;&#213;</comment>
+            </column>
+        </property>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="quote_comment_id">
+                    <comment>
+                    &#187;&#216;&#184;&#180;&#181;&#196;&#198;&#192;&#194;&#219;&#181;&#196;id,null&#177;&#237;&#202;&#190;&#182;&#212;&#206;&#202;&#204;&#226;&#181;&#196;&#214;&#177;&#189;&#211;&#198;&#192;&#194;&#219;</comment>
+                </column>
+            </key>
+            <one-to-many class="edu.nk.pker.model.po.Comment" />
+        </set>
+    </class>
+</hibernate-mapping>

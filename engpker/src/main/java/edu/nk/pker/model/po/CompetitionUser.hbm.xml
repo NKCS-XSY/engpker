@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.CompetitionUser" table="competition_user" catalog="pker" optimistic-lock="version">
+        <id name="cuid" type="java.lang.Integer">
+            <column name="cuid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="competition" class="edu.nk.pker.model.po.Competition" fetch="select">
+            <column name="competition_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" not-null="true">
+                <comment>&#178;&#206;&#188;&#211;&#177;&#200;&#200;&#252;&#181;&#196;&#211;&#195;&#187;&#167;id</comment>
+            </column>
+        </many-to-one>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="start_time" length="19" not-null="true">
+                <comment>&#191;&#170;&#202;&#188;&#180;&#240;&#204;&#226;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="submitTime" type="timestamp">
+            <column name="submit_time" length="19" not-null="true">
+                <comment>&#204;&#225;&#189;&#187;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="answerSheet" type="string">
+            <column name="answer_sheet" length="16777215">
+                <comment>&#211;&#195;&#187;&#167;&#181;&#196;&#180;&#240;&#176;&#184;</comment>
+            </column>
+        </property>
+        <property name="duration" type="int">
+            <column name="duration" not-null="true">
+                <comment>&#211;&#195;&#187;&#167;&#215;&#220;&#211;&#195;&#202;&#177;</comment>
+            </column>
+        </property>
+        <property name="rightQuestions" type="java.lang.Integer">
+            <column name="right_questions">
+                <comment>&#213;&#253;&#200;&#183;&#204;&#226;&#202;&#253;</comment>
+            </column>
+        </property>
+        <property name="wrongQuestions" type="java.lang.Integer">
+            <column name="wrong_questions">
+                <comment>&#180;&#237;&#206;&#243;&#204;&#226;&#202;&#253;</comment>
+            </column>
+        </property>
+        <property name="noanswerQuestions" type="java.lang.Integer">
+            <column name="noanswer_questions">
+                <comment>&#206;&#180;&#215;&#247;&#180;&#240;&#204;&#226;&#202;&#253;</comment>
+            </column>
+        </property>
+        <property name="pointGet" type="java.lang.Double">
+            <column name="point_get" precision="22" scale="0">
+                <comment>&#211;&#195;&#187;&#167;&#181;&#195;&#183;&#214;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

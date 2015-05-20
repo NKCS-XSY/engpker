@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.nk.pker.model.po.Note" table="note" catalog="pker" optimistic-lock="version">
+        <id name="noteId" type="java.lang.Integer">
+            <column name="note_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="question" class="edu.nk.pker.model.po.Question" fetch="select">
+            <column name="question_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="noteContent" type="string">
+            <column name="note_content" length="65535" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
