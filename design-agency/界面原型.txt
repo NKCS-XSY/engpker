@@ -1,0 +1,84 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#">首页</a>
+				</li>
+				<li>
+					<a href="#">资料</a>
+				</li>
+				<li class="disabled">
+					<a href="#">信息</a>
+				</li>
+				<li class="dropdown pull-right">
+					 <a class="dropdown-toggle" href="#" data-toggle="dropdown">下拉<strong class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">操作</a>
+						</li>
+						<li>
+							<a href="#">设置栏目</a>
+						</li>
+						<li>
+							<a href="#">更多设置</a>
+						</li>
+						<li class="divider">
+						</li>
+						<li>
+							<a href="#">分割线</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="accordion" id="accordion-429202">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" href="#accordion-element-827876" data-toggle="collapse" data-parent="#accordion-429202">选项卡 #1</a>
+					</div>
+					<div class="accordion-body in collapse" id="accordion-element-827876">
+						<div class="accordion-inner">
+							功能块...
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" href="#accordion-element-641034" data-toggle="collapse" data-parent="#accordion-429202">选项卡 #2</a>
+					</div>
+					<div class="accordion-body collapse" id="accordion-element-641034">
+						<div class="accordion-inner">
+							功能块...
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="thumbnails">
+				<li class="span4">
+					<div class="thumbnail">
+						<img alt="300x200" src="img/people.jpg" />
+						<div class="caption">
+							<h3>
+								冯诺尔曼结构
+							</h3>
+							<p>
+								也称普林斯顿结构，是一种将程序指令存储器和数据存储器合并在一起的存储器结构。程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+						<img alt="300x200" src="img/city.jpg" />
+						<div class="caption">
+							<h3>
+								哈佛结构
+							</h3>
+							<p>
+								哈佛结构是一种将程序指令存储和数据存储分开的存储器结构，它的主要特点是将程序和数据存储在不同的存储空间中，进行独立编址。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
