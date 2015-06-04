@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://localhost:8080/examxx/student/examing/2 -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!--<base href="http://localhost:8080/examxx/">-->
+    <base href=".">
+
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Exam++</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/exam.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <style type="text/css"></style>
+
+</head>
+
+<body style="zoom: 1;" data-feedly-mini="yes" ginger_software_stylesheet="true" ginger_software_doc="true">
+    <div id="dic_bubble" class="selection_bubble" style="z-index:9999;" fetching="false"></div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="logo">
+                        <h1><a href="http://localhost:8080/examxx/#"><img alt="" src="./Exam++_files/logo.png"></a></h1>
+                    </div>
+                </div>
+                <div class="col-xs-7" id="login-info">
+
+
+                    <div id="login-info-user">
+
+                        <a href="http://localhost:8080/examxx/user-detail/123456" id="system-info-account" target="_blank">123456</a>
+                        <span>|</span>
+                        <a href="http://localhost:8080/examxx/j_spring_security_logout"><i class="fa fa-sign-out"></i> 退出</a>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Navigation bar starts -->
+
+    <div class="navbar bs-docs-nav" role="banner">
+        <div class="container">
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://localhost:8080/examxx/home"><i class="fa fa-home"></i>主页</a>
+                    </li>
+                    <li class="active">
+                        <a href="http://localhost:8080/examxx/start-exam"><i class="fa fa-edit"></i>试题练习</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8080/examxx/student/usercenter"><i class="fa fa-dashboard"></i>会员中心</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8080/examxx/student/setting"><i class="fa fa-cogs"></i>个人设置</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Navigation bar ends -->
+
+    <div class="content" style="margin-bottom: 100px;">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3" style="padding-right: 0px;padding-bottom:15px;">
+                    <div class="def-bk" id="bk-exam-control">
+
+                        <div class="def-bk-content" id="exam-control">
+
+                            <div id="question-time" class="question-time-normal">
+                                <div style="height:140px;text-align: center;">
+                                    <i id="time-icon" class="fa fa-clock-o"> </i>
+                                </div>
+
+                                <span style="margin-right:10px;color: #B8B8B8;">已用时</span>
+                                <span id="exam-clock">00:59:42</span>
+                                <span id="exam-timestamp" style="display:none;">3582</span>
+                                <div id="answer-save-info"></div>
+
+                            </div>
+                            <div id="question-submit">
+                                <button class="btn-success btn" style="width:100%;">
+                                    我要交卷
+                                </button>
+                            </div>
+                            <div id="exam-info" style="display:none;">
+                                <span id="answer-hashcode"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xs-9" style="padding-right: 0px;">
+                    <div class="def-bk" id="bk-exampaper">
+
+                        <div class="expand-bk-content" id="bk-conent-exampaper">
+                            <div id="exampaper-header">
+                                <div id="exampaper-title" class="">
+                                    <i class="fa fa-send"></i>
+                                    <span id="exampaper-title-name"> 模拟试卷 </span>
+                                    <span style="display:none;" id="exampaper-id">1</span>
+                                </div>
+                                <div id="exampaper-desc-container" class="">
+                                    <div id="exampaper-desc" class="exampaper-filter"><span class="exampaper-filter-item efi-qt-singlechoice efi-selected">单选题[<span class="efi-fno">0</span>/<span class="efi-tno">60</span>]<span class="efi-qcode" style="display:none;">qt-singlechoice</span></span><span class="exampaper-filter-item efi-qt-trueorfalse">判断题[<span class="efi-fno">0</span>/<span class="efi-tno">40</span>]<span class="efi-qcode" style="display:none;">qt-trueorfalse</span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input type="hidden" id="hist-id" value="1">
+                            <input type="hidden" id="paper-id" value="2">
+                            <ul id="exampaper-body">
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">1.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">1</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶机动车在道路上违反道路交通安全法的行为，属于什么行为？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 违章行为</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 违法行为</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 过失行为</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 违规行为</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">2.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">2</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">机动车驾驶人违法驾驶造成重大交通事故构成犯罪的，依法追究什么责任？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 刑事责任</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 民事责任</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 经济责任</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 直接责任</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">3.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">3</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">机动车驾驶人造成事故后逃逸构成犯罪的，吊销驾驶证且多长时间不得重新取得驾驶证？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 5年内</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 10年内</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 终生</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 20年内</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">4.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">11</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">未取得驾驶证的学员在道路上学习驾驶技能，下列哪种做法是正确的？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 使用所学车型的教练车由教练员随车指导</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 使用所学车型的教练车单独驾驶学习</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 使用私家车由教练员随车指导</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 使用所学车型的教练车由非教练员的驾驶人随车指导</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">5.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">12</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">机动车驾驶人初次申领驾驶证后的实习期是多长时间？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 6个月</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 12个月</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 16个月</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 18个月</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">6.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">13</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">在实习期内驾驶机动车的，应当在车身后部粘贴或者悬挂哪种标志？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 注意新手标志</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 注意避让标志</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 统一式样的实习标志</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 注意车距标志</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">7.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">14</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">以欺骗、贿赂等不正当手段取得驾驶证被依法撤销驾驶许可的，多长时间不得重新申请驾驶许可？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 3年内</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 终身</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 1年内</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 5年内</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">8.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">20</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶拼装机动车上路行驶的驾驶人，除按规定接受罚款外，还要受到哪种处理？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 处10日以下拘留</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 暂扣驾驶证</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 吊销驾驶证</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 追究刑事责任</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">9.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">21</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶报废机动车上路行驶的驾驶人，除按规定罚款外，还要受到哪种处理？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 撤销驾驶许可</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 收缴驾驶证</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 强制恢复车况</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 吊销驾驶证</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-singlechoice" style="display: list-item;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">10.</span><span class="question-type" style="display: none;">singlechoice</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">1</span><span>[单选题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">22</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">对驾驶已达到报废标准的机动车上路行驶的驾驶人，会受到下列哪种处罚？</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="A" name="question-radio1" class="question-input">A: 处15日以下拘留</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="B" name="question-radio1" class="question-input">B: 吊销机动车驾驶证</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="C" name="question-radio1" class="question-input">C: 处20以上200元以下罚款</li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="D" name="question-radio1" class="question-input">D: 追究刑事责任</li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">61.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">4</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶机动车违反道路交通安全法律法规发生交通事故属于交通违章行为。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">62.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">5</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶机动车在道路上违反道路通行规定应当接受相应的处罚。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">63.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">6</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">对未取得驾驶证驾驶机动车的，追究其法律责任。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">64.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">8</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">造成交通事故后逃逸且构成犯罪的驾驶人,将吊销驾驶证且终生不得重新取得驾驶证。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">65.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">9</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶机动车在道路上违反交通安全法规的行为属于违法行为。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">66.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">15</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">驾驶人要按照驾驶证载明的准驾车型驾驶车辆。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">67.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">16</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">上路行驶的机动车未随车携带身份证的，交通警察可依法扣留机动车。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">68.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">17</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">上路行驶的机动车未放置检验合格标志的，交通警察可依法扣留机动车。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">69.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">18</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">伪造、变造机动车驾驶证构成犯罪的将被依法追究刑事责任。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                                <li class="question qt-trueorfalse" style="display: none;">
+                                    <div class="question-title">
+                                        <div class="question-title-icon"></div><span class="question-no">70.</span><span class="question-type" style="display: none;">trueorfalse</span><span class="knowledge-point-id" style="display: none;">1</span><span class="question-type-id" style="display: none;">3</span><span>[判断题]</span><span class="question-point-content"><span>(</span><span class="question-point">1</span><span>分)</span></span><span class="question-id" style="display:none;">19</span>
+                                    </div>
+                                    <form class="question-body">
+                                        <p class="question-body-text">机动车驾驶人在实习期内驾驶机动车不得牵引挂车。</p>
+                                        <ul class="question-opt-list">
+                                            <li class="question-list-item">
+                                                <input type="radio" value="T" name="question-radio2" class="question-input"><span class="question-li-text">正确</span>
+                                            </li>
+                                            <li class="question-list-item">
+                                                <input type="radio" value="F" name="question-radio2" class="question-input"><span class="question-li-text">错误</span>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                            </ul>
+                            <div id="exampaper-footer" style="height: 217px;">
+                                <div id="question-navi" style="position: fixed; bottom: 0px; z-index: 1;">
+                                    <div id="question-navi-controller">
+                                        <i class="fa fa-arrow-circle-down"></i>
+                                        <span>答题卡</span>
+                                    </div>
+                                    <div id="question-navi-content">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading-progress" style="display:none;">
+            <div id="loading-content">
+                <h2>正在提交您的答案</h2>
+                <img class="loading-gif" src="./Exam++_files/loading.gif">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copy">
+                        <p>
+                            Exam++ Copyright © <a href="http://www.examxx.net/" target="_blank">Exam++</a> - <a href="http://localhost:8080/examxx/" target="_blank">主页</a> | <a href="http://www.examxx.net/" target="_blank">关于我们</a> | <a href="http://www.examxx.net/" target="_blank">FAQ</a> | <a href="http://www.examxx.net/" target="_blank">联系我们</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Slider Ends -->
+
+    <!-- Javascript files -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/all.js"></script>
+    <script type="text/javascript" src="../js/paper-examing.js"></script>
+
+
+
+</body>
+
+</html>
