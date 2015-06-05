@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ExamReport
- * 考试结果报告
+ * Servlet implementation class AddFriendServlet
  */
-@WebServlet("/ExamReport")
-public class ExamReport extends HttpServlet {
+@WebServlet("/AddFriendServlet")
+public class AddFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExamReport() {
+    public AddFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
