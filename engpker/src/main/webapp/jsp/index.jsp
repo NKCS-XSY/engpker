@@ -1,7 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
++ request.getServerName() + ":" + request.getServerPort()
++ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+	<base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -45,7 +52,8 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#home">主页</a></li>
                 <li><a href="#services">英语</a></li>
-                <li><a href="jsp/login.html">登录</a></li>
+                <li><a href="jsp/login.jsp">登录</a></li>
+                <li><a href="jsp/register.jsp">注册</a></li>
                 <li><a href="#pricing">个人主页</a></li>
                 <!--<li><a href="#clients">Clients</a></li-->
                 <li><a href="#contact">联系我们</a></li>
@@ -74,7 +82,7 @@
 
                   </p>
 
-                    <p><a class="btn btn-success btn-lg" href="login.html"> 欢迎登录<i class="icon icon-angle-right"></i></a></p>
+                    <p><a class="btn btn-success btn-lg" href="/jsp/login.jsp"> 欢迎登录<i class="icon icon-angle-right"></i></a></p>
                 </div>
             </div>
         </div>
@@ -673,7 +681,7 @@
                     <nav id="footer-menu">
                         <ul>
                             <li><a href="#">首页</a></li>
-                            <li><a href="#">登录</a></li>
+                            <li><a href="/jsp/login.jsp">登录</a></li>
                             <li><a href="#">联系我们</a></li>
                         </ul>
                     </nav>
