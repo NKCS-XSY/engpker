@@ -82,7 +82,7 @@ String basePath = request.getScheme() + "://"
 
                   </p>
 
-                    <p><a class="btn btn-success btn-lg" href="/jsp/login.jsp"> 欢迎登录<i class="icon icon-angle-right"></i></a></p>
+                    <p><a class="btn btn-success btn-lg" href="jsp/login.jsp"> 欢迎登录<i class="icon icon-angle-right"></i></a></p>
                 </div>
             </div>
         </div>

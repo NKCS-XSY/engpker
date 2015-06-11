@@ -1,4 +1,4 @@
-﻿/* Dark Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
+/* Dark Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -269,7 +269,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #BDBDBD;
-  background-color: #060606;
+  /*background-color: #060606;*/
 }
 input,
 button,
@@ -1687,10 +1687,10 @@ output {
   padding: 8px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #BDBDBD;
+  color: #333333;
   background-color: #ffffff;
   background-image: none;
-  border: 1px solid #282828;
+  /*border: 1px solid #282828;*/
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -4745,7 +4745,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel {
   margin-bottom: 20px;
-  background-color: #222222;
+  /*background-color: #222222;*/
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -4959,7 +4959,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
-  background-color: #2a9fd6;
+  background-color: #008080;
   border-color: #2a9fd6;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body {
@@ -6275,4 +6275,18 @@ table.tablesorter thead tr th:hover {
                     left: -14px;
                     right: auto;
                 }
+        }
+        
+        .tab-content{
+        background-color:#fff;
+        color:#333333;
+        }
+        .panel .panel-body{
+        background-color:#fff;
+        }
+        
+        form label{
+        font-weight: bold !important;
+  		font-size: 14px;
+        color: #333333
         }
