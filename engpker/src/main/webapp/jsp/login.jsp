@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
@@ -43,17 +45,32 @@ String basePath = request.getScheme() + "://"
 <body class="login-img3-body">
 
 <div class="container">
+	<c:if test="${!empty requestScope.msgcode }">
+		<%
+		int msgcode = Integer.parseInt(request.getAttribute("msgcode").toString());
+		switch(msgcode){
+		case 101:
+			out.print("<script>alert('账号或密码错误，登录失败！');</script>");
+			break;
+		case 103:
+			out.print("<script>alert('当前账号已经登录！');</script>");
+			break;
+		default:
+			break;
+		}
+	%>
+	</c:if>
 
-    <form class="login-form" action="index.html">
+    <form class="login-form"  method="post" action="/engpker/LoginServlet">
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_profile"></i></span>
-                <input type="text" class="form-control" placeholder="用户名" autofocus>
+                <input type="text" class="form-control" placeholder="用户名" autofocus name="username" id="username"  >
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" class="form-control" placeholder="密码" name="password" id="password" >
             </div>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> 记住密码

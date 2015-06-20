@@ -8,11 +8,17 @@ import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
 
 import edu.nk.pker.model.po.User;
+import edu.nk.pker.util.HibernateUtil;
 
 /**
  * Home object for domain model class User.
@@ -27,8 +33,9 @@ public class UserHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
+			return HibernateUtil.getSessionFactory();
+//			return (SessionFactory) new InitialContext()
+//					.lookup("SessionFactory");
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(
@@ -123,5 +130,52 @@ public class UserHome {
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	public User selectByObjet(String username, String password) {
+		// TODO Auto-generated method stub
+		Session session=null;	
+		log.debug("getting User instance with user: " + username);
+		try {
+			// 方法1: 使用Query
+//		    session=sessionFactory.openSession();
+//		    session.beginTransaction();
+//			//from后面是对象，不是表名
+//			String hql="from User as user where user.username=:username & user.password=:password";//使用命名参数，推荐使用，易读。
+//			Query query=sessionFactory.getCurrentSession().createQuery(hql);
+//		    query.setString("username", username);
+//		    query.setString(password, password);
+//		    List<User> userList=query.list();
+			
+		    // 方法2: 使用 Criteria
+		    session=sessionFactory.openSession();
+		    session.beginTransaction();
+		    Criteria c=session.createCriteria(User.class);
+		    c.add(Restrictions.eq("username",username))//eq是等于，gt是大于，lt是小于,or是或
+		    			.add(Restrictions.eq("password", password));
+		    List userList=c.list();
+		    
+		    log.debug("UserList:"+userList.toString());
+			if(userList!=null && userList.size()>0)
+			{
+				log.debug("get successful, instance found");
+				User user=(User) userList.get(0);
+				return user;
+			}
+			else
+			{
+				log.debug("get successful, no instance found");
+				return null;
+			}
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}	
+		finally{
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
+
 	}
 }

@@ -3,11 +3,45 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
+<!-- session-factory不要加name属性 -->
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">1</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pker</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+<!--         <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property> -->
+<!--         <property name="hibernate.current_session_context_class">thread</property> -->
+<!-- 		<property name="current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</property> -->
+        
+         <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+        
+<!--         <mapping package="edu.nk.pker.model.po" />   -->
+        <mapping resource="edu/nk/pker/model/po/Category.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Choice.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Comment.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Competition.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/CompetitionUser.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Favorite.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Follow.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Message.hbm.xml"/>
+        <mapping resource="edu/nk/pker/model/po/Note.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Paper.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Question.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/QuestionTag.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/QuestionType.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Record.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Role.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/Tag.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/User.hbm.xml"/>
+         <mapping resource="edu/nk/pker/model/po/UserRole.hbm.xml"/>
+
     </session-factory>
 </hibernate-configuration>

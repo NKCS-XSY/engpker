@@ -3,16 +3,20 @@
 <!-- 	xmlns="http://java.sun.com/xml/ns/javaee"  -->
 <!-- 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  -->
 <!-- 	version="3.0"> -->
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
   <display-name>English PKer</display-name>
   <welcome-file-list>
     <welcome-file>/jsp/index.jsp</welcome-file>
-<!--     <welcome-file>/jsp/index.html</welcome-file> -->
   </welcome-file-list>
-<!--  Servlet -->
+  <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml
+            classpath:/hibernate.cfg.xml
+        </param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -24,6 +28,7 @@
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+  
     <description></description>
     <display-name>AddQuestionServlet</display-name>
     <servlet-name>AddQuestionServlet</servlet-name>
@@ -33,6 +38,4 @@
     <servlet-name>AddQuestionServlet</servlet-name>
     <url-pattern>/AddQuestionServlet</url-pattern>
   </servlet-mapping>
-  
-  
 </web-app>
