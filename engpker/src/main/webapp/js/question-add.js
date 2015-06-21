@@ -9,7 +9,7 @@ question_add = {
 		this.bindChangeQuestionType();
 		this.bindAddOpt();
 		this.bindRemoveOpt();
-		this.bindSubmit();
+		//this.bindSubmit();
 	},
 
 	bindChangeQuestionType : function changeQuestionType() {
@@ -49,7 +49,7 @@ question_add = {
 						'Content-Type' : 'application/json'
 					},
 					type : "POST",
-					url : "admin/question-add",
+					url : "engpker/AddQuestionServlet",
 					data : JSON.stringify(question_entity),
 					success : function(message, tst, jqXHR) {
 						if (!util.checkSessionOut(jqXHR))
@@ -109,22 +109,6 @@ question_add = {
 		return result;
 	},
 
-	checkKnowledge : function checkKnowledge() {
-		var result = true;
-
-		if ($("#point-to-select option").length == 0) {
-			$(".question-knowledge .form-message").text("该试题至少对应一个知识点");
-			$("#point-to-select").addClass("has-error");
-			result = false;
-		} else if ($("#point-to-select option").length > 4) {
-			$(".question-knowledge .form-message").text("知识点数量不应该超过4个");
-			$("#point-to-select").addClass("has-error");
-			result = false;
-		}
-
-		return result;
-
-	},
 
 	/**
 	 *检查试题内容

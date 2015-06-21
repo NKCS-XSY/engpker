@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 //@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Log log = LogFactory.getLog(UserHome.class);
+	private static final Log log = LogFactory.getLog(LoginServlet.class);
     /**
      * @see HttpServlet#HttpServlet()
      */
