@@ -68,7 +68,7 @@ String basePath = request.getScheme() + "://"
 							<a href="start-exam"><i class="fa fa-edit"></i>试题练习</a>
 						</li>
 						<li class="active">
-							<a href="student/usercenter"><i class="fa fa-dashboard"></i>个人主页</a>
+							<a href="jsp/profile.jsp"><i class="fa fa-dashboard"></i>个人主页</a>
 						</li>
 						<li>
 							<a href="student/setting"><i class="fa fa-cogs"></i>个人设置</a>

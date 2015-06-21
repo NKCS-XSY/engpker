@@ -9,10 +9,12 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import edu.nk.pker.model.po.Question;
+import edu.nk.pker.util.HibernateUtil;
 
 /**
  * Home object for domain model class Question.
@@ -27,8 +29,9 @@ public class QuestionHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
+			return HibernateUtil.getSessionFactory();
+//			return (SessionFactory) new InitialContext()
+//					.lookup("SessionFactory");
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(
@@ -123,5 +126,23 @@ public class QuestionHome {
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+	
+	public void add(Question instance) {
+		Session session=null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			log.debug("Adding a question record !");
+			session.save(instance);
+			session.getTransaction().commit();
+		}catch(RuntimeException re){
+			log.error("add question failed",re);
+			throw re;
+		}finally {
+			session.flush();
+			session.close();
+		}
+		
 	}
 }

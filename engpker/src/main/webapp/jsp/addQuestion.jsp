@@ -22,8 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="shortcut icon" href="<%=basePath%>/img/favicon.ico" />
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="css/style-2.css" rel="stylesheet">
 		
+		<link href="css/style-2.css" rel="stylesheet">
 		<link href="css/question-add.css" rel="stylesheet">
 		<link href="chart/morris.css" rel="stylesheet">
 		<link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />
@@ -150,12 +150,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <form id="question-add-form" style="margin-top:40px;" method="post" enctype="multipart/form-data" action="/engpker/AddQuestionServlet">
                             <div class="form-line form-question-name" style="display: block;">
                                 <span class="form-label"><span class="warning-label"></span>试题名称：</span>
-                                <input type="text" class="df-input-narrow"><span class="form-message"></span>
+                                <input type="text" class="df-input-narrow" name="name"><span class="form-message"></span>
                                 <br>
                             </div>
                             <div class="form-line question-type" id="question-category">
                                 <span class="form-label"><span class="warning-label">*</span>试题类别：</span>
-                                <select id="question-category-select" class="df-input-narrow">
+                                <select id="question-category-select" class="df-input-narrow" name="category" >
 
                                     <option value="1">GRE</option>
 
@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-line question-type" id="question-type">
                                 <span class="form-label"><span class="warning-label">*</span>试题形式：</span>
-                                <select id="question-type-select" class="df-input-narrow">
+                                <select id="question-type-select" class="df-input-narrow" name="type">
 
                                     <option value="1">单选题</option>
 
@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                             <div class="form-line question-content">
                                 <span class="form-label"><span class="warning-label">*</span>试题内容：</span>
-                                <textarea class="add-question-ta"></textarea>
+                                <textarea class="add-question-ta" name="content"></textarea>
                                 <span class="add-img add-content-img" style="width:100px;" data-toggle="modal" data-target="#myModal">添加图片</span>
                                 <span class="form-message"></span>
                             </div>
@@ -221,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="form-line form-question-answer1 correct-answer" style="display: block;">
                                 <span class="form-label"><span class="warning-label">*</span>正确答案：</span>
-                                <select class="df-input-narrow">
+                                <select class="df-input-narrow" name="answer">
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -288,10 +288,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <input type="text" class="df-input-narrow"><span class="form-message"></span>
                                 <br>
                             </div>
-                            
-
                             <div class="form-line">
-                                <input id="btn-save" value="保存" type="submit" class="df-submit">
+                                <button id="btn-save"  type="submit"  class="df-submit" >保存</button>
                             </div>
                         </form>
 

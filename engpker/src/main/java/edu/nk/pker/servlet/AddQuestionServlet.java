@@ -15,7 +15,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import edu.nk.pker.biz.IQuestionBiz;
+import edu.nk.pker.biz.impl.QuestionBizImpl;
+import edu.nk.pker.model.po.Category;
+import edu.nk.pker.model.po.Question;
+import edu.nk.pker.model.po.QuestionType;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Arrays;
 
@@ -26,6 +35,7 @@ import java.util.Arrays;
 @WebServlet("/AddQuestionsServlet")
 public class AddQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Log log=LogFactory.getLog(AddQuestionServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -52,7 +62,7 @@ public class AddQuestionServlet extends HttpServlet {
 		// 1-1：设置服务器接受上传文件的位置（服务器的文件夹）
 		String fileUploadPath = this.getServletContext().getRealPath(
 				"/resources/images");
-		System.out.println("[PublishServlet] 设置服务器接受客户端上传文件的位置是："
+		log.info("设置服务器接受客户端上传文件的位置是："
 				+ fileUploadPath);
 		// 1-2：设置服务器临时缓冲区的位置（临时缓冲的文件夹）
 		File fileUploadTempPath = new File(this.getServletContext()
@@ -61,7 +71,7 @@ public class AddQuestionServlet extends HttpServlet {
 			// 创建一个全新的
 			fileUploadTempPath.mkdir();
 		}
-		System.out.println("[PublishServlet] 设置服务器接受客户端上传文件的临时位置是："
+		log.info("设置服务器接受客户端上传文件的临时位置是："
 				+ fileUploadTempPath.getPath());
 
 		// 步骤2：判断表单是否符合上传要求
@@ -73,13 +83,14 @@ public class AddQuestionServlet extends HttpServlet {
 			factory.setRepository(fileUploadTempPath);
 			// 3-2：设置缓冲区对象的大小（4*1024 字节）
 			factory.setSizeThreshold(4 * 1024);
-			System.out.println("[PublishServlet] 初始化服务器接受客户端上传文件的临时位置完毕！");
+			log.info("初始化服务器接受客户端上传文件的临时位置完毕！");
 
 			// 步骤4：解析客户端表单待上传的数据
 			// 4-1:创建一个ServletFileUpload对象完成对二进制表单数据的解析，并实现服务器上传功能
 			ServletFileUpload sfu = new ServletFileUpload(factory);
 			try {
 				// 创建实体类对象
+				Question question= new Question();
 				
 				// 4-2:将解析到的二进制文件封装到FileItem的对象中
 				@SuppressWarnings("unchecked")
@@ -93,7 +104,43 @@ public class AddQuestionServlet extends HttpServlet {
 						// 获取客户端表单输入元素的name属性的值
 						String name = fileItem.getFieldName().trim();
 						// 判断数据为哪个字段数据
-
+						if ("name".equalsIgnoreCase(name)) {
+							String value = fileItem.getString();
+							value = new String(value.getBytes("iso8859-1"),
+									"UTF-8");
+							question.setName(value);
+							log.info("Question.name: "+value);
+							
+						}
+						 else if ("category".equalsIgnoreCase(name)) {
+								String value = fileItem.getString();
+								value = new String(value.getBytes("iso8859-1"),
+										"UTF-8");
+								Category category=new Category();
+								category.setId(Integer.parseInt(value));
+								question.setCategory(category);
+								log.info("Question.Category:  " + value);
+							} else if ("type".equalsIgnoreCase(name)) {
+								String value = fileItem.getString();
+								value = new String(value.getBytes("iso8859-1"),
+										"UTF-8");
+								QuestionType questionType =new QuestionType();
+								questionType.setId(Integer.parseInt(value));
+								question.setQuestionType(questionType);
+							    log.info("Question.QuestionType:  " + value);
+							}else if("content".equalsIgnoreCase(name)) {
+								String value = fileItem.getString();
+								value = new String(value.getBytes("iso8859-1"),
+										"UTF-8");
+								question.setContent(value);
+							    log.info("Question.Content:  " + value);
+							}else if("answer".equalsIgnoreCase(name)) {
+								String value = fileItem.getString();
+								value = new String(value.getBytes("iso8859-1"),
+										"UTF-8");
+								question.setAnalysis(value);
+							    log.info("Question.AnswerId:  " + value);
+							}
 					} else {
 						System.out.println("文件：>");
 						// 4-3:获取上传文件的名称
@@ -113,15 +160,25 @@ public class AddQuestionServlet extends HttpServlet {
 							request.setAttribute("msgcode", msgcode);
 							RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/publish.jsp");
 							dispatcher.forward(request, response);
-							System.out.println("[PublishServlet] 该类型文件不允许上传！");
+							log.debug("该类型文件不允许上传！");
 							return;
 						}
-						System.out.println("[PublishServlet] 获取上传文件的名称为: "
-								+ fileName);
+						log.info("获取上传文件的名称为: "+ fileName);
 						// 4-4:封装上传文件对象并写入到服务器
 						File saveFile = new File(fileUploadPath, fileName);
 						fileItem.write(saveFile);			
 					}
+				}
+				IQuestionBiz questionBiz=new QuestionBizImpl();
+				question.setCreateTime(new Date());
+				question.setLastModify(new Date());
+				if(questionBiz.add(question)){
+					log.debug("试题添加成功");
+					RequestDispatcher dispatcher = request
+						.getRequestDispatcher("/jsp/questionList.jsp");
+				dispatcher.include(request, response);
+				}else{
+					log.debug("试题添加失败");
 				}
 				// 调用Biz层将Resource对象存入数据库
 //						IResourceBiz resBiz = new ResourceBizImpl();	
@@ -183,7 +240,7 @@ public class AddQuestionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("客户端表单不符合上传要求！");
+			log.info("客户端表单不符合上传要求！");
 		}
 	}
 	// 自定义方法完成上传文件名称的自动生成
