@@ -8,12 +8,15 @@ import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
 
 import edu.nk.pker.model.po.Question;
+import edu.nk.pker.model.po.User;
 import edu.nk.pker.util.HibernateUtil;
 
 /**
@@ -143,6 +146,28 @@ public class QuestionHome {
 			session.flush();
 			session.close();
 		}
-		
+	}
+	public List<Question> getRandomQuestions(final int number){
+		Session session=null;	
+		log.debug("getting"+number+" random questions");
+		try {
+		    // สนำร Criteria
+		    session=sessionFactory.openSession();
+		    session.beginTransaction();
+		    List questionList=null;
+		    Criteria c=session.createCriteria(Question.class);
+		    c.add(Restrictions.le("id", number));
+		    questionList=c.list();
+		    log.debug("get succeed");
+			return questionList;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}	
+		finally{
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
 	}
 }

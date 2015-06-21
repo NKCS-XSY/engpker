@@ -104,40 +104,28 @@ public class AddQuestionServlet extends HttpServlet {
 						// 获取客户端表单输入元素的name属性的值
 						String name = fileItem.getFieldName().trim();
 						// 判断数据为哪个字段数据
+						String value = fileItem.getString();
+						value = new String(value.getBytes("iso8859-1"),
+								"UTF-8");
+						
 						if ("name".equalsIgnoreCase(name)) {
-							String value = fileItem.getString();
-							value = new String(value.getBytes("iso8859-1"),
-									"UTF-8");
 							question.setName(value);
 							log.info("Question.name: "+value);
-							
 						}
 						 else if ("category".equalsIgnoreCase(name)) {
-								String value = fileItem.getString();
-								value = new String(value.getBytes("iso8859-1"),
-										"UTF-8");
 								Category category=new Category();
 								category.setId(Integer.parseInt(value));
 								question.setCategory(category);
 								log.info("Question.Category:  " + value);
 							} else if ("type".equalsIgnoreCase(name)) {
-								String value = fileItem.getString();
-								value = new String(value.getBytes("iso8859-1"),
-										"UTF-8");
 								QuestionType questionType =new QuestionType();
 								questionType.setId(Integer.parseInt(value));
 								question.setQuestionType(questionType);
 							    log.info("Question.QuestionType:  " + value);
 							}else if("content".equalsIgnoreCase(name)) {
-								String value = fileItem.getString();
-								value = new String(value.getBytes("iso8859-1"),
-										"UTF-8");
 								question.setContent(value);
 							    log.info("Question.Content:  " + value);
 							}else if("answer".equalsIgnoreCase(name)) {
-								String value = fileItem.getString();
-								value = new String(value.getBytes("iso8859-1"),
-										"UTF-8");
 								question.setAnalysis(value);
 							    log.info("Question.AnswerId:  " + value);
 							}
@@ -174,9 +162,11 @@ public class AddQuestionServlet extends HttpServlet {
 				question.setLastModify(new Date());
 				if(questionBiz.add(question)){
 					log.debug("试题添加成功");
-					RequestDispatcher dispatcher = request
-						.getRequestDispatcher("/jsp/questionList.jsp");
-				dispatcher.include(request, response);
+//					RequestDispatcher dispatcher = request
+//						.getRequestDispatcher("/jsp/questionList.jsp");
+//				dispatcher.forward(request, response);
+				response.setContentType("text/html;charset=UTF-8");
+				response.sendRedirect("jsp/questionList.jsp");
 				}else{
 					log.debug("试题添加失败");
 				}
