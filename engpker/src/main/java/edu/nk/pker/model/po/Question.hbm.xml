@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-5-20 10:08:15 by Hibernate Tools 4.3.1 -->
+<!-- Generated 2015-6-21 22:47:37 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="edu.nk.pker.model.po.Question" table="question" catalog="pker" optimistic-lock="version">
         <id name="questionId" type="java.lang.Integer">
@@ -11,84 +11,85 @@
         <many-to-one name="category" class="edu.nk.pker.model.po.Category" fetch="select">
             <column name="category_id">
                 <comment>
-                &#204;&#226;&#196;&#191;&#203;&#249;&#202;&#244;&#209;&#167;&#191;&#198;id,&#177;&#200;&#200;&#231;&#191;&#188;&#209;&#208;&#211;&#162;&#211;&#239;,gre,toefl&#181;&#200;&#181;&#200;</comment>
-            </column>
-        </many-to-one>
-        <many-to-one name="choice" class="edu.nk.pker.model.po.Choice" fetch="select">
-            <column name="answer_id">
-                <comment>
-                &#195;&#191;&#184;&#246;&#209;&#161;&#207;&#238;&#211;&#208;&#210;&#187;&#184;&#246;id,answerid&#202;&#199;&#213;&#253;&#200;&#183;&#209;&#161;&#207;&#238;&#181;&#196;id</comment>
+                &#233;&#162;&#152;&#231;&#155;&#174;&#230;&#137;&#128;&#229;&#177;&#158;&#229;&#173;&#166;&#231;&#167;&#145;id,&#230;&#175;&#148;&#229;&#166;&#130;&#232;&#128;&#131;&#231;&#160;&#148;&#232;&#139;&#177;&#232;&#175;&#173;,gre,toefl&#231;&#173;&#137;&#231;&#173;&#137;</comment>
             </column>
         </many-to-one>
         <many-to-one name="questionType" class="edu.nk.pker.model.po.QuestionType" fetch="select">
             <column name="type_id">
                 <comment>
-                &#204;&#226;&#196;&#191;&#192;&#224;&#208;&#205;id,&#176;&#252;&#192;&#168;&#209;&#161;&#212;&#241;&#204;&#226;,&#204;&#238;&#191;&#213;&#204;&#226;,&#188;&#242;&#180;&#240;&#204;&#226;&#181;&#200;&#181;&#200;</comment>
+                &#233;&#162;&#152;&#231;&#155;&#174;&#231;&#177;&#187;&#229;&#158;&#139;id,&#229;&#140;&#133;&#230;&#139;&#172;&#233;&#128;&#137;&#230;&#139;&#169;&#233;&#162;&#152;,&#229;&#161;&#171;&#231;&#169;&#186;&#233;&#162;&#152;,&#231;&#174;&#128;&#231;&#173;&#148;&#233;&#162;&#152;&#231;&#173;&#137;&#231;&#173;&#137;</comment>
             </column>
         </many-to-one>
         <many-to-one name="user" class="edu.nk.pker.model.po.User" fetch="select">
             <column name="creator">
-                <comment>&#180;&#180;&#189;&#168;&#213;&#223;id</comment>
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#232;&#128;&#133;id</comment>
             </column>
         </many-to-one>
         <property name="name" type="string">
             <column name="name" length="40" not-null="true">
-                <comment>&#206;&#202;&#204;&#226;&#195;&#251;&#179;&#198;/&#180;&#250;&#186;&#197;</comment>
+                <comment>&#233;&#151;&#174;&#233;&#162;&#152;&#229;&#144;&#141;&#231;&#167;&#176;/&#228;&#187;&#163;&#229;&#143;&#183;</comment>
+            </column>
+        </property>
+        <property name="answer" type="string">
+            <column name="answer" length="100">
+                <comment>
+                &#233;&#128;&#130;&#229;&#186;&#148;&#229;&#143;&#175;&#232;&#131;&#189;&#230;&#156;&#137;&#229;&#164;&#154;&#228;&#184;&#170;&#231;&#173;&#148;&#230;&#161;&#136;&#231;&#154;&#132;&#230;&#131;&#133;&#229;&#134;&#181;</comment>
             </column>
         </property>
         <property name="content" type="string">
             <column name="content" length="500" not-null="true">
-                <comment>&#204;&#226;&#184;&#201;</comment>
+                <comment>&#233;&#162;&#152;&#229;&#185;&#178;</comment>
             </column>
         </property>
         <property name="reference" type="string">
             <column name="reference" length="1000">
-                <comment>&#191;&#188;&#194;&#199;&#180;&#248;&#205;&#188;&#198;&#172;&#181;&#196;&#204;&#226;&#196;&#191;</comment>
+                <comment>&#232;&#128;&#131;&#232;&#153;&#145;&#229;&#184;&#166;&#229;&#155;&#190;&#231;&#137;&#135;&#231;&#154;&#132;&#233;&#162;&#152;&#231;&#155;&#174;</comment>
             </column>
         </property>
         <property name="options" type="string">
             <column name="options" length="300">
-                <comment>&#204;&#226;&#196;&#191;&#181;&#196;&#209;&#161;&#207;&#238;,&#184;&#246;&#202;&#253;&#178;&#187;&#182;&#168;</comment>
+                <comment>
+                &#233;&#162;&#152;&#231;&#155;&#174;&#231;&#154;&#132;&#233;&#128;&#137;&#233;&#161;&#185;,&#228;&#184;&#170;&#230;&#149;&#176;&#228;&#184;&#141;&#229;&#174;&#154;</comment>
             </column>
         </property>
         <property name="analysis" type="string">
             <column name="analysis" length="65535">
-                <comment>&#204;&#226;&#196;&#191;&#183;&#214;&#206;&#246;</comment>
+                <comment>&#233;&#162;&#152;&#231;&#155;&#174;&#229;&#136;&#134;&#230;&#158;&#144;</comment>
             </column>
         </property>
         <property name="appendix" type="string">
             <column name="appendix" length="65535">
-                <comment>&#184;&#189;&#188;&#211;,&#177;&#184;&#211;&#195;</comment>
+                <comment>&#233;&#153;&#132;&#229;&#138;&#160;,&#229;&#164;&#135;&#231;&#148;&#168;</comment>
             </column>
         </property>
         <property name="createTime" type="timestamp">
             <column name="create_time" length="19" not-null="true">
-                <comment>&#180;&#180;&#189;&#168;&#202;&#177;&#188;&#228;</comment>
+                <comment>&#229;&#136;&#155;&#229;&#187;&#186;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
             </column>
         </property>
         <property name="lastModify" type="timestamp">
             <column name="last_modify" length="19" not-null="true">
-                <comment>&#215;&#238;&#186;&#243;&#208;&#222;&#184;&#196;&#202;&#177;&#188;&#228;</comment>
+                <comment>&#230;&#156;&#128;&#229;&#144;&#142;&#228;&#191;&#174;&#230;&#148;&#185;&#230;&#151;&#182;&#233;&#151;&#180;</comment>
             </column>
         </property>
         <property name="rightTimes" type="java.lang.Integer">
             <column name="right_times">
-                <comment>&#213;&#253;&#200;&#183;&#180;&#206;&#202;&#253;</comment>
+                <comment>&#230;&#173;&#163;&#231;&#161;&#174;&#230;&#172;&#161;&#230;&#149;&#176;</comment>
             </column>
         </property>
         <property name="exposeTimes" type="java.lang.Integer">
             <column name="expose_times">
-                <comment>&#177;&#187;&#215;&#246;&#180;&#206;&#202;&#253;</comment>
+                <comment>&#232;&#162;&#171;&#229;&#129;&#154;&#230;&#172;&#161;&#230;&#149;&#176;</comment>
             </column>
         </property>
         <property name="wrongTimes" type="java.lang.Integer">
             <column name="wrong_times">
-                <comment>&#180;&#237;&#206;&#243;&#180;&#206;&#202;&#253;</comment>
+                <comment>&#233;&#148;&#153;&#232;&#175;&#175;&#230;&#172;&#161;&#230;&#149;&#176;</comment>
             </column>
         </property>
         <property name="difficulty" type="java.lang.Integer">
             <column name="difficulty">
-                <comment>&#204;&#226;&#196;&#191;&#196;&#209;&#182;&#200;</comment>
+                <comment>&#233;&#162;&#152;&#231;&#155;&#174;&#233;&#154;&#190;&#229;&#186;&#166;</comment>
             </column>
         </property>
         <set name="questionTags" table="question_tag" inverse="true" lazy="true" fetch="select">

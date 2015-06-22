@@ -48,7 +48,7 @@ drop table if exists question_type;
 CREATE TABLE question (
     question_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL COMMENT '问题名称/代号',
-    answer VARCHAR(500) COMMENT '适应可能有多个答案的情况',
+    answer VARCHAR(500) COMMENT '每个选项有一个id,answerid是正确选项的id',
     content VARCHAR(500) NOT NULL COMMENT '题干',
     reference VARCHAR(1000) DEFAULT NULL COMMENT '考虑带图片的题目',
     category_id INT COMMENT '题目所属学科id,比如考研英语,gre,toefl等等',

@@ -11,10 +11,10 @@
   <welcome-file-list>
     <welcome-file>/jsp/index.jsp</welcome-file>
   </welcome-file-list>
-  <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
-  </context-param>
+<!--   <context-param> -->
+<!--         <param-name>contextConfigLocation</param-name> -->
+<!--         <param-value>/WEB-INF/applicationContext.xml</param-value> -->
+<!--   </context-param> -->
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -25,8 +25,8 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
   
+  <servlet>
     <description></description>
     <display-name>AddQuestionServlet</display-name>
     <servlet-name>AddQuestionServlet</servlet-name>
@@ -36,4 +36,16 @@
     <servlet-name>AddQuestionServlet</servlet-name>
     <url-pattern>/AddQuestionServlet</url-pattern>
   </servlet-mapping>
+<!--   <servlet> -->
+  
+<!--     <description></description> -->
+<!--     <display-name>AddExamPaperServlet</display-name> -->
+<!--     <servlet-name>AddExamPaperServlet</servlet-name> -->
+<!--     <servlet-class>edu.nk.pker.servlet.AddExamPaperServlet</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>AddExamPaperServlet</servlet-name> -->
+<!--     <url-pattern>/AddExamPaperServlet</url-pattern> -->
+<!--   </servlet-mapping> -->
+  
 </web-app>
