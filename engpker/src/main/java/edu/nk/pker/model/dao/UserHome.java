@@ -17,6 +17,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
+import edu.nk.pker.model.po.Question;
 import edu.nk.pker.model.po.User;
 import edu.nk.pker.util.HibernateUtil;
 
@@ -177,5 +178,21 @@ public class UserHome {
 			session.close();
 		}
 
+	}
+	public void add(User instance) {
+		Session session=null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			log.debug("Adding a user record !");
+			session.save(instance);
+			session.getTransaction().commit();
+		}catch(RuntimeException re){
+			log.error("add user failed",re);
+			throw re;
+		}finally {
+			session.flush();
+			session.close();
+		}
 	}
 }
