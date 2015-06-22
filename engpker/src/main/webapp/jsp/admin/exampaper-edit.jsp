@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>Exam++</title>
+		<title>EngPKer</title>
 		<meta name="keywords" content="">
 		<link rel="shortcut icon" href="<%=basePath%>images/favicon.ico" />
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -127,9 +127,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div id="exampaper-header">
 										<div id="exampaper-title">
 											<i class="fa fa-send"></i>
-											<span id="exampaper-title-name"> ${exampapername} </span>
-											<span style="display:none;" id="exampaper-id">${exampaperid}</span>
-											
+											<span id="exampaper-title-name"> ${papername} </span>
+											<span style="display:none;" id="exampaper-id">${paperid}</span>
 										</div>
 										<div id="exampaper-desc-container">
 											<div id="exampaper-desc" class="exampaper-filter">
@@ -142,10 +141,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 										</div>
 										
-										
 									</div>
 									<ul id="exampaper-body" style="padding:0px;">
-										${htmlStr }
 									</ul>
 									<div id="exampaper-footer">
 										<div id="question-navi">
@@ -176,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						        <h4 class="modal-title">选择试题添加到试卷中</h4>
 						      </div>
 						      <div class="modal-body">
-						        <iframe  id="qt-selector-iframe" src="admin/questionfilterdialog-0-0-0-0-1.html" width="100%"></iframe>
+						        <iframe  id="qt-selector-iframe" src="jsp/admin/question-list-dialog.jsp" width="100%"></iframe>
 						      </div>
 						      <div class="modal-footer">
 							        <button type="button" class="btn btn-default" data-dismiss="modal">关闭窗口</button>

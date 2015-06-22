@@ -353,43 +353,44 @@ var examing = {
 				if (checkboxs.length == 0) {
 					util.notify("请选择需要添加的试题!");
 				}else{
-					var request = $.ajax({
-						headers : {
-							'Accept' : 'application/json',
-							'Content-Type' : 'application/json'
-						},
-						type : "POST",
-						url : 'admin/get-question-detail4add',
-						data : JSON.stringify(values)
-					});
-					request.done(function(questionList,tst,jqXHR) {
-						if(!util.checkSessionOut(jqXHR))return false;
-						for(var i=0;i<questionList.length;i++){
-							var question=questionList[i];
-							var deletehtml = "<a class=\"tmp-ques-remove\" title=\"删除此题\">删除</a>";
-							
-							/*var current_answer = "";
-							if(question.question_type_id==3){
-								current_answer = question.answer == "T"? "正确":"错误";
-							}else{
-								current_answer = question.answer;
-							}*/
-							
-							/*var answerhtml = "<div class=\"tmp-correct-answer\"><span>正确答案：</span><p>"+ current_answer +"</p></div>";*/
-							var newquestion = $('<div/>').html(question.content).contents();
-						/*	newquestion.append(answerhtml);*/
-							newquestion.find(".question-title").append(deletehtml);
-							$("#exampaper-body").append(newquestion);
-						}
-						examing.refreshNavi();
-						examing.addNumber();
-						examing.updateSummery();
-						$("#question-selector-modal").modal('hide');
-
-						var questions = $("li.question");
-						examing.scrollToElement($(questions[questions.length-1]));
-						
-					});
+					//。。。待修改
+//					var request = $.ajax({
+//						headers : {
+//							'Accept' : 'application/json',
+//							'Content-Type' : 'application/json'
+//						},
+//						type : "POST",
+//						url : 'admin/get-question-detail4add',
+//						data : JSON.stringify(values)
+//					});
+//					request.done(function(questionList,tst,jqXHR) {
+//						if(!util.checkSessionOut(jqXHR))return false;
+//						for(var i=0;i<questionList.length;i++){
+//							var question=questionList[i];
+//							var deletehtml = "<a class=\"tmp-ques-remove\" title=\"删除此题\">删除</a>";
+//							
+//							/*var current_answer = "";
+//							if(question.question_type_id==3){
+//								current_answer = question.answer == "T"? "正确":"错误";
+//							}else{
+//								current_answer = question.answer;
+//							}*/
+//							
+//							/*var answerhtml = "<div class=\"tmp-correct-answer\"><span>正确答案：</span><p>"+ current_answer +"</p></div>";*/
+//							var newquestion = $('<div/>').html(question.content).contents();
+//						/*	newquestion.append(answerhtml);*/
+//							newquestion.find(".question-title").append(deletehtml);
+//							$("#exampaper-body").append(newquestion);
+//						}
+//						examing.refreshNavi();
+//						examing.addNumber();
+//						examing.updateSummery();
+//						$("#question-selector-modal").modal('hide');
+//
+//						var questions = $("li.question");
+//						examing.scrollToElement($(questions[questions.length-1]));
+//						
+//					});
 						 
 					request.fail(function(jqXHR, textStatus) {
 						util.error("操作失败请稍后尝试");

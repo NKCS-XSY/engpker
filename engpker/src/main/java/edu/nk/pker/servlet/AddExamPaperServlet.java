@@ -47,14 +47,13 @@ public class AddExamPaperServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// 获取参数
 		String papername= request.getParameter("papername");
+		log.debug("Paper Name is "+papername);
 		Paper paper=new Paper();
 		paper.setName(papername);
 		IPaperBiz paperBiz = new PaperBizImpl();
 		try {
-			if(paperBiz.add(paper)) {
-				response.sendRedirect("/engpker/jsp/admin/exampaper-edit.jsp");
-			}
-			
+			Integer id = paperBiz.add(paper);
+			response.sendRedirect("/engpker/jsp/admin/exampaper-edit.jsp?paperid="+id+"&papername="+papername);
 		}catch(RuntimeException re) {
 			
 		}

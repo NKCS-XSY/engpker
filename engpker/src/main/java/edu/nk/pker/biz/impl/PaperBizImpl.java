@@ -17,13 +17,12 @@ public class PaperBizImpl implements IPaperBiz {
 	/* (non-Javadoc)
 	 * @see edu.nk.pker.biz.IPaperBiz#add(edu.nk.pker.model.po.Paper)
 	 */
-	public boolean add(Paper paper) {
+	public Integer add(Paper paper) {
 		// TODO Auto-generated method stub
 		try {
-			paperHome.add(paper);
-			return true;
+			return paperHome.add(paper);
 		}catch(RuntimeException re) {
-			return false;
+			throw re;
 		}
 	}
 

@@ -128,14 +128,17 @@ public class PaperHome {
 			throw re;
 		}
 	}
-	public void add(Paper instance) {
+	public Integer add(Paper instance) {
 		Session session=null;
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			log.debug("Adding a question record !");
-			session.save(instance);
+			Integer id = null;
+			id=(Integer) session.save(instance);
+			log.debug("添加试卷成功:id:"+id);
 			session.getTransaction().commit();
+			return id;
 		}catch(RuntimeException re){
 			log.error("add question failed",re);
 			throw re;
