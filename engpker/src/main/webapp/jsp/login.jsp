@@ -77,7 +77,7 @@ String basePath = request.getScheme() + "://"
                 <span class="pull-right"> <a href="#"> 忘记密码?</a></span>
             </label>
             <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
-            <button class="btn btn-info btn-lg btn-block" type="submit">注册</button>
+            <button class="btn btn-info btn-lg btn-block" href="/engpker/jsp/register.jsp">注册</button>
         </div>
     </form>
 

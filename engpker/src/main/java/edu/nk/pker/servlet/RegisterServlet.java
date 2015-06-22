@@ -16,6 +16,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import edu.nk.pker.biz.IUserBiz;
 import edu.nk.pker.biz.impl.UserBizImpl;
@@ -27,7 +29,7 @@ import edu.nk.pker.model.po.User;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final Log log=LogFactory.getLog(RegisterServlet.class); 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,7 +51,37 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String fileUploadPath = this.getServletContext().getRealPath(
+		request.setCharacterEncoding("UTF-8");
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		String user_pwd1=request.getParameter("user_pwd1");
+		User user =new User();
+		user.setUsername(username);
+		user.setTruename(username);
+		user.setPassword(password);
+		IUserBiz userBiz=new UserBizImpl();
+		user.setRegistertime(new Date());
+		boolean flag1 =  userBiz.add(user);
+		System.out.println(flag1);
+		
+		boolean flag2 = false;
+		if(user.getPassword().equals(user_pwd1))
+			flag2=true;
+		System.out.println(flag2);
+		//boolean flag3=userdynamicinfoBiz.add(userdynamicinfo);
+		//System.out.println(flag3);
+		boolean flag=flag1&&flag2;
+		// 根据返回值结果进行页面跳转
+		if (flag) {
+			// 跳转至登录页面
+			request.setAttribute("username", user.getUsername());
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher("/jsp/login.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			System.out.println("注册失败！！！！！");
+		}
+		/*String fileUploadPath = this.getServletContext().getRealPath(
 				"/upload/file");
 		System.out.println("[SingleFileUploadServlet] 设置服务器接受客户端上传文件的位置是："
 				+ fileUploadPath);
@@ -157,7 +189,7 @@ public class RegisterServlet extends HttpServlet {
 								File saveFile = new File(fileUploadPath, fileName);
 								fileItem.write(saveFile);
 								System.out.println("[SingleFileUploadServlet] 上传文件成功！");
-							}*/
+							}
 						}
 						// 调用Biz层的方法完成注册功能
 						IUserBiz userinfoBiz=new UserBizImpl();
@@ -201,7 +233,8 @@ public class RegisterServlet extends HttpServlet {
 		private synchronized String generateUnqieName() {
 			return String.valueOf(System.nanoTime());
 				
-		}
+		}*/
+	}
 }
 
 

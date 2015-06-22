@@ -44,7 +44,7 @@ String basePath = request.getScheme() + "://"
 
 <div class="container">
 
-    <form class="login-form" action="/engpker/RegisterServlet">
+    <form class="login-form" action="/engpker/RegisterServlet" enctype="multipart/form-data">
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock-open_alt"></i></p>
             <div class="input-group">
