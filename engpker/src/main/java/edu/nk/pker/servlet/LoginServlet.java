@@ -11,18 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.nk.pker.biz.IUserBiz;
-import edu.nk.pker.biz.impl.UserBizImpl;
-import edu.nk.pker.model.dao.UserHome;
-import edu.nk.pker.model.po.User;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import edu.nk.pker.biz.IUserBiz;
+import edu.nk.pker.biz.impl.UserBizImpl;
+import edu.nk.pker.model.po.User;
 
 /**
  * Servlet implementation class Login
  */
-//@WebServlet("/Login")
+//@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Log log = LogFactory.getLog(LoginServlet.class);
