@@ -18,7 +18,13 @@ public class UserBizImpl implements IUserBiz {
 	
 	public boolean add(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		try{
+			userHome.add(user);
+			return true;
+		}
+		catch(RuntimeException re) {
+			return false;
+		}
 	}
 
 	public List<User> findAll() {

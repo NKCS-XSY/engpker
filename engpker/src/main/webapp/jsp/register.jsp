@@ -44,28 +44,29 @@ String basePath = request.getScheme() + "://"
 
 <div class="container">
 
-    <form class="login-form" action="index.html">
+    <form class="login-form" action="/engpker/RegisterServlet" enctype="multipart/form-data">
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock-open_alt"></i></p>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_mail_alt"></i></span>
-                <input type="text" class="form-control" placeholder="手机/邮箱" autofocus>
+                <input type="text" name="username" id="username" class="form-control" placeholder="手机/邮箱" autofocus>
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" name="password" id="password" class="form-control" placeholder="密码">
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_check_alt"></i></span>
-                <input type="password" class="form-control" placeholder="确认密码">
+                <input type="password" name="user_pwd1" id="user_pwd1" class="form-control" placeholder="确认密码">
             </div>
             <div class="form-group">
                 <label class="checkbox text-right"><input type="checkbox"><span>阅读并接受《用户协议》</span></label>
             </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">提交</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit" id="submit">提交</button>
              </div>
            <p>
-            已有账号？
+           
+            <a href="/engpker/jsp/login.jsp">已有账号？</a>
            </p>
     </form>
 
